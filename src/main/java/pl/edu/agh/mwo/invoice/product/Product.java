@@ -11,7 +11,7 @@ public abstract class Product {
 
     protected Product(String name, BigDecimal price, BigDecimal tax) {
         if( name.isEmpty()){
-            throw IllegalArgumentException;
+            throw new IllegalArgumentException();
         }
         this.name = name;
         this.price = price;
