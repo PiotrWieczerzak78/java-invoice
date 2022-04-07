@@ -7,8 +7,6 @@ import org.hamcrest.Matchers;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
-import pl.edu.agh.mwo.invoice.Invoice;
 import pl.edu.agh.mwo.invoice.product.DairyProduct;
 import pl.edu.agh.mwo.invoice.product.OtherProduct;
 import pl.edu.agh.mwo.invoice.product.Product;
@@ -153,29 +151,29 @@ public class InvoiceTest {
     }
 
     @Test
-    public void testInvoiceWithNoLine(){
+    public void testInvoiceWithNoLine() {
         ArrayList<String> invoiceList = new ArrayList<>();
         int number = new Invoice().getNumber();
         String numberAsString = String.valueOf(number);
         invoiceList = invoice.stringFormat(number);
-        Assert.assertThat( numberAsString, Matchers.comparesEqualTo(invoiceList.get(0)));
+        Assert.assertThat(numberAsString, Matchers.comparesEqualTo(invoiceList.get(0)));
         Assert.assertThat("Liczba pozycji: 0", Matchers.comparesEqualTo(invoiceList.get(1)));
     }
 
     @Test
-    public void testInvoiceWithOneLineAndNoTaxes(){
+    public void testInvoiceWithOneLineAndNoTaxes() {
         ArrayList<String> invoiceList = new ArrayList<>();
         int number = new Invoice().getNumber();
         String numberAsString = String.valueOf(number);
         invoice.addProduct(new TaxFreeProduct("Chleb", new BigDecimal("5")), 2);
         invoiceList = invoice.stringFormat(number);
-        Assert.assertThat( numberAsString, Matchers.comparesEqualTo(invoiceList.get(0)));
+        Assert.assertThat(numberAsString, Matchers.comparesEqualTo(invoiceList.get(0)));
         Assert.assertThat("Chleb,2,10", Matchers.comparesEqualTo(invoiceList.get(1)));
         Assert.assertThat("Liczba pozycji: 1", Matchers.comparesEqualTo(invoiceList.get(2)));
     }
 
     @Test
-    public void testInvoiceWithMoreLinesAndDifferentTaxes(){
+    public void testInvoiceWithMoreLinesAndDifferentTaxes() {
         ArrayList<String> invoiceList = new ArrayList<>();
         int number = new Invoice().getNumber();
         String numberAsString = String.valueOf(number);
@@ -186,7 +184,7 @@ public class InvoiceTest {
         // 1000x pinezka - price with tax: 12.30
         invoice.addProduct(new OtherProduct("Pinezka", new BigDecimal("0.01")), 1000);
         invoiceList = invoice.stringFormat(number);
-        Assert.assertThat( numberAsString, Matchers.comparesEqualTo(invoiceList.get(0)));
+        Assert.assertThat(numberAsString, Matchers.comparesEqualTo(invoiceList.get(0)));
 
         Assert.assertThat("Chleb,2,10", Matchers.comparesEqualTo(invoiceList.get(1)));
         Assert.assertThat("Chedar,3,32.40", Matchers.comparesEqualTo(invoiceList.get(2)));
@@ -195,19 +193,20 @@ public class InvoiceTest {
     }
 
     @Test
-    public void testInvoiceWithSameProductsAsOneLine(){
+    public void testInvoiceWithSameProductsAsOneLine() {
         ArrayList<String> invoiceList = new ArrayList<>();
         int number = new Invoice().getNumber();
         String numberAsString = String.valueOf(number);
         invoice.addProduct(new TaxFreeProduct("Chleb", new BigDecimal("5")), 2);
         invoice.addProduct(new TaxFreeProduct("Chleb", new BigDecimal("5")), 3);
         invoiceList = invoice.stringFormat(number);
-        Assert.assertThat( numberAsString, Matchers.comparesEqualTo(invoiceList.get(0)));
+        Assert.assertThat(numberAsString, Matchers.comparesEqualTo(invoiceList.get(0)));
         Assert.assertThat("Chleb,5,25", Matchers.comparesEqualTo(invoiceList.get(1)));
         Assert.assertThat("Liczba pozycji: 1", Matchers.comparesEqualTo(invoiceList.get(2)));
     }
+
     @Test
-    public void testInvoiceWithSameProductsAs4Times(){
+    public void testInvoiceWithSameProductsAs4Times() {
         ArrayList<String> invoiceList = new ArrayList<>();
         int number = new Invoice().getNumber();
         String numberAsString = String.valueOf(number);
@@ -216,13 +215,13 @@ public class InvoiceTest {
         invoice.addProduct(new TaxFreeProduct("Chleb", new BigDecimal("5")), 4);
         invoice.addProduct(new TaxFreeProduct("Chleb", new BigDecimal("5")), 5);
         invoiceList = invoice.stringFormat(number);
-        Assert.assertThat( numberAsString, Matchers.comparesEqualTo(invoiceList.get(0)));
+        Assert.assertThat(numberAsString, Matchers.comparesEqualTo(invoiceList.get(0)));
         Assert.assertThat("Chleb,14,70", Matchers.comparesEqualTo(invoiceList.get(1)));
         Assert.assertThat("Liczba pozycji: 1", Matchers.comparesEqualTo(invoiceList.get(2)));
     }
 
     @Test
-    public void testInvoiceWithMoreDulicateLinesAndDifferentTaxes(){
+    public void testInvoiceWithMoreDulicateLinesAndDifferentTaxes() {
         ArrayList<String> invoiceList = new ArrayList<>();
         int number = new Invoice().getNumber();
         String numberAsString = String.valueOf(number);
@@ -239,10 +238,10 @@ public class InvoiceTest {
         // 1000x pinezka - price with tax: 12.30
         invoice.addProduct(new OtherProduct("Pinezka", new BigDecimal("0.01")), 1000);
         invoiceList = invoice.stringFormat(number);
-        Assert.assertThat( numberAsString, Matchers.comparesEqualTo(invoiceList.get(0)));
-        Assert.assertThat("Chedar,6,64.80", Matchers.comparesEqualTo(invoiceList.get(1)));
-        Assert.assertThat("Chleb,4,20", Matchers.comparesEqualTo(invoiceList.get(2)));
+        Assert.assertThat(numberAsString, Matchers.comparesEqualTo(invoiceList.get(0)));
 
+        Assert.assertThat("Chleb,4,20", Matchers.comparesEqualTo(invoiceList.get(1)));
+        Assert.assertThat("Chedar,6,64.80", Matchers.comparesEqualTo(invoiceList.get(2)));
         Assert.assertThat("Pinezka,2000,24.6000", Matchers.comparesEqualTo(invoiceList.get(3)));
 
 

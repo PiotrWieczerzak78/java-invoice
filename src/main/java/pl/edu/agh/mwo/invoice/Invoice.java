@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
 import pl.edu.agh.mwo.invoice.product.Product;
 
 public class Invoice {
@@ -17,18 +18,20 @@ public class Invoice {
     }
 
     public void addProduct(Product product, Integer quantity) {
-        int existingQuantity= 0;
+        int existingQuantity = 0;
         if (product == null || quantity <= 0) {
             throw new IllegalArgumentException();
         }
-        for(Map.Entry<Product, Integer> prod : products.entrySet()) {
-            if(prod.getKey().getName().equals(product.getName()) && prod.getKey().getPrice().equals(product.getPrice())&& prod.getKey().getTaxPercent().equals(product.getTaxPercent())){
-                existingQuantity = (int)prod.getValue();
+        for (Map.Entry<Product, Integer> prod : products.entrySet()) {
+            if (prod.getKey().getName().equals(product.getName())
+                    && prod.getKey().getPrice().equals(product.getPrice())
+                    && prod.getKey().getTaxPercent().equals(product.getTaxPercent())) {
+                existingQuantity = (int) prod.getValue();
                 products.remove(prod.getKey());
                 break;
             }
         }
-        products.put(product,existingQuantity+quantity);
+        products.put(product, existingQuantity + quantity);
     }
 
     public BigDecimal getNetTotal() {
@@ -60,14 +63,15 @@ public class Invoice {
     public ArrayList<String> stringFormat(int number) {
         ArrayList<String> invoiceList = new ArrayList<>();
         invoiceList.add(String.valueOf(number));
-        String invoiceLine="";
+        String invoiceLine = "";
         for (Product product : products.keySet()) {
             BigDecimal quantity = new BigDecimal(products.get(product));
             BigDecimal priceWithTax = product.getPriceWithTax().multiply(quantity);
-            invoiceLine= product.getName()+","+String.valueOf(quantity)+","+String.valueOf(priceWithTax);
+            invoiceLine = product.getName() + "," + String.valueOf(quantity) + "," + String.valueOf(priceWithTax);
             invoiceList.add(invoiceLine);
         }
-        invoiceList.add("Liczba pozycji: "+String.valueOf(products.size()));;
+        invoiceList.add("Liczba pozycji: " + String.valueOf(products.size()));
+        ;
         return invoiceList;
     }
 }
