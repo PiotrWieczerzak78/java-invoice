@@ -67,7 +67,8 @@ public class Invoice {
         for (Product product : products.keySet()) {
             BigDecimal quantity = new BigDecimal(products.get(product));
             BigDecimal priceWithTax = product.getPriceWithTax().multiply(quantity);
-            invoiceLine = product.getName() + "," + String.valueOf(quantity) + "," + String.valueOf(priceWithTax);
+            invoiceLine = product.getName() + "," + String.valueOf(quantity) + ","
+                    + String.valueOf(priceWithTax);
             invoiceList.add(invoiceLine);
         }
         invoiceList.add("Liczba pozycji: " + String.valueOf(products.size()));

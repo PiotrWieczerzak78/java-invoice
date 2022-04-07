@@ -185,9 +185,8 @@ public class InvoiceTest {
         invoice.addProduct(new OtherProduct("Pinezka", new BigDecimal("0.01")), 1000);
         invoiceList = invoice.stringFormat(number);
         Assert.assertThat(numberAsString, Matchers.comparesEqualTo(invoiceList.get(0)));
-
-        Assert.assertThat("Chleb,2,10", Matchers.comparesEqualTo(invoiceList.get(1)));
-        Assert.assertThat("Chedar,3,32.40", Matchers.comparesEqualTo(invoiceList.get(2)));
+        Assert.assertThat("Chedar,3,32.40", Matchers.comparesEqualTo(invoiceList.get(1)));
+        Assert.assertThat("Chleb,2,10", Matchers.comparesEqualTo(invoiceList.get(2)));
         Assert.assertThat("Pinezka,1000,12.3000", Matchers.comparesEqualTo(invoiceList.get(3)));
         Assert.assertThat("Liczba pozycji: 3", Matchers.comparesEqualTo(invoiceList.get(4)));
     }
@@ -239,12 +238,9 @@ public class InvoiceTest {
         invoice.addProduct(new OtherProduct("Pinezka", new BigDecimal("0.01")), 1000);
         invoiceList = invoice.stringFormat(number);
         Assert.assertThat(numberAsString, Matchers.comparesEqualTo(invoiceList.get(0)));
-
-        Assert.assertThat("Chleb,4,20", Matchers.comparesEqualTo(invoiceList.get(1)));
-        Assert.assertThat("Chedar,6,64.80", Matchers.comparesEqualTo(invoiceList.get(2)));
-        Assert.assertThat("Pinezka,2000,24.6000", Matchers.comparesEqualTo(invoiceList.get(3)));
-
-
+        Assert.assertThat("Chedar,6,64.80", Matchers.comparesEqualTo(invoiceList.get(1)));
+        Assert.assertThat("Pinezka,2000,24.6000", Matchers.comparesEqualTo(invoiceList.get(2)));
+        Assert.assertThat("Chleb,4,20", Matchers.comparesEqualTo(invoiceList.get(3)));
         Assert.assertThat("Liczba pozycji: 3", Matchers.comparesEqualTo(invoiceList.get(4)));
     }
 }
